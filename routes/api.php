@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RemindersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('user', UserController::class);
+Route::resource('reminder', RemindersController::class);
+Route::post('updateReminder/{user_id}', [UserController::class, 'updateReminder']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+    Route::get('user', [UserController::class, 'index']);
 });
